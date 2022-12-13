@@ -56,9 +56,10 @@ namespace Services.Services.CRUD
             return brandsRepo.GetBrandById(Id); 
         }
 
-        public void UpdateBrand(Brand brand)
+        public bool UpdateBrand(Brand brand)
         {
             brandsRepo.UpdateBrand(brand);
+            return true;
         }
         //Phone
         public Task<Phone> CreatePhone(Phone phone)

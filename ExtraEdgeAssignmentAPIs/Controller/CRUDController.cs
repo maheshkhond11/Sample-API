@@ -17,230 +17,189 @@ namespace _ExtraEdgeAssignmentAPIs.Controller
         }
         #region Brand
         //post
-        [HttpPost("AddBrand")]
-        public async Task<Object> AddPhone([FromBody] Brand brand)
+        [HttpPost]
+        public IActionResult AddBrand(Brand brand)
         {
-            try
-            {
-                await _cRUDService.CreateBrand(brand);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if(brand == null)
+                return BadRequest();
+            if(ModelState.IsValid)
+                return Ok(_cRUDService.CreateBrand(brand));
+            return BadRequest();
         }
        //Delete
-        [HttpDelete("DeleteBrand")]
-        public bool DeleteBrand(string BrandName)
+        [HttpDelete]
+        public IActionResult DeleteBrand(string BrandName)
         {
-            try
-            {
-                _cRUDService.DeleteBrand(BrandName);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (BrandName == null)
+                return BadRequest();
+            if(ModelState.IsValid)
+                return  Ok(_cRUDService.DeleteBrand(BrandName));
+            return BadRequest();
         }
         //Patch
-        [HttpPatch("UpdateBrand")]
-        public bool UpdatePerson(Brand brand)
+        [HttpPatch]
+        public IActionResult UpdateBrand(Brand brand)
         {
-            try
-            {
-                _cRUDService.UpdateBrand(brand);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if(_cRUDService.UpdateBrand(brand))
+                return Ok();
+            return BadRequest();
         }
         //Get All
-        [HttpGet("GetAllBrands")]
-        public IEnumerable<Brand> GetAllBrands()
+        [HttpGet]
+        public ActionResult<IEnumerable<Brand>> GetAllBrands()
         {
-            var data = _cRUDService.GetAllBrands();
-            return data;
+            if (!ModelState.IsValid)
+                return BadRequest();
+            return Ok(_cRUDService.GetAllBrands());
         }
-        [HttpGet("GetById")]
-        public Brand GetBrandById(int id)
+        [HttpGet]
+        public ActionResult<Brand> GetBrandById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetBrandById(id);
-            return data;
+            return Ok(data);
         }
         #endregion
         #region Phone
         //post
-        [HttpPost("AddPhone")]
-        public async Task<Object> AddPhone(Phone phone)
+        [HttpPost]
+        public IActionResult AddPhone(Phone phone)
         {
-            try
-            {
-                await _cRUDService.CreatePhone(phone);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (phone== null)
+                return BadRequest();
+            if (ModelState.IsValid)
+                return Ok(_cRUDService.CreatePhone(phone));
+            return BadRequest();
         }
         //Delete
-        [HttpDelete("DeletePhone")]
-        public bool DeletePhone(string PhoneName)
+        [HttpDelete]
+        public IActionResult DeletePhone(string PhoneName)
         {
-            try
-            {
-                _cRUDService.DeletePhone(PhoneName);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.DeletePhone(PhoneName);
+                return Ok(true);
         }
         //Patch
-        [HttpPatch("UpdatePhone")]
-        public bool UpdatePhone(Phone phone)
+        [HttpPatch]
+        public IActionResult UpdatePhone(Phone phone)
         {
-            try
-            {
-                _cRUDService.UpdatePhone(phone);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.UpdatePhone(phone);
+                return Ok(true);
         }
         //Get All
-        [HttpGet("GetAllPhones")]
-        public IEnumerable<Phone> GetAllPhones()
+        [HttpGet]
+        public ActionResult<IEnumerable<Phone>> GetAllPhones()
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetAllPhones();
-            return data;
+            return Ok(data);
         }
-        [HttpGet("GetById")]
-        public Phone GetPhoneById(int id)
+        [HttpGet]
+        public ActionResult<Phone> GetPhoneById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetPhoneById(id);
-            return data;
+            return Ok(data);
         }
         #endregion
         #region Sale
         //post
-        [HttpPost("AddSale")]
-        public async Task<Object> AddSale([FromBody] Sale sale)
+        [HttpPost]
+        public IActionResult AddSale(Sale sale)
         {
-            try
-            {
-                await _cRUDService.CreateSale(sale);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (sale == null)
+                return BadRequest();
+            if (ModelState.IsValid)
+                return Ok(_cRUDService.CreateSale(sale));
+            return BadRequest();
         }
         //Delete
-        [HttpDelete("DeleteSale")]
-        public bool DeleteSale(string SaleName)
+        [HttpDelete]
+        public IActionResult DeleteSale(string SaleName)
         {
-            try
-            {
-                _cRUDService.DeleteSale(SaleName);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.DeleteSale(SaleName);
+                return Ok(true);
         }
         //Patch
-        [HttpPatch("UpdateSale")]
-        public bool UpdateSale(Sale sale)
+        [HttpPatch]
+        public IActionResult UpdateSale(Sale sale)
         {
-            try
-            {
-                _cRUDService.UpdateSale(sale);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.UpdateSale(sale);
+                return Ok(true);
         }
         //Get All
-        [HttpGet("GetAllSales")]
-        public IEnumerable<Sale> GetAllSales()
+        [HttpGet]
+        public ActionResult<IEnumerable<Sale>> GetAllSales()
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetAllSales();
-            return data;
+            return Ok(data);
         }
-        [HttpGet("GetById")]
-        public Sale GetSaleById(int id)
+        [HttpGet]
+        public ActionResult<Sale> GetSaleById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetSaleById(id);
-            return data;
+            return Ok(data);
         }
         #endregion
         #region Record
         //post
-        [HttpPost("AddRecord")]
-        public async Task<Object> AddRecord(Record record)
+        [HttpPost]
+        public IActionResult AddRecord(Record record)
         {
-            try
-            {
-                await _cRUDService.CreateRecord(record);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (record == null)
+                return BadRequest();
+            if (ModelState.IsValid)
+                return Ok(_cRUDService.CreateRecord(record));
+            return BadRequest();
         }
         //Delete
-        [HttpDelete("DeleteRecord")]
-        public bool DeleteRecord(int id)
+        [HttpDelete]
+        public IActionResult DeleteRecord(int id)
         {
-            try
-            {
-                _cRUDService.DeleteRecord(id);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.DeleteRecord(id);
+                return Ok(true);
         }
         //Patch
-        [HttpPatch("UpdateRecord")]
-        public bool UpdateRecord(Record record)
+        [HttpPatch]
+        public IActionResult UpdateRecord(Record record)
         {
-            try
-            {
-                _cRUDService.UpdateRecord(record);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (!ModelState.IsValid)
+                return BadRequest();
+            _cRUDService.UpdateRecord(record);
+                return Ok(true);
         }
         //Get All
-        [HttpGet("GetAllRecords")]
-        public IEnumerable<Record> GetAllRecords()
+        [HttpGet]
+        public ActionResult<IEnumerable<Record>> GetAllRecords()
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetAllRecords();
-            return data;
+            return Ok(data);
         }
-        [HttpGet("GetById")]
-        public Record GetRecordById(int id)
+        [HttpGet]
+        public ActionResult<Record> GetRecordById(int id)
         {
+            if (!ModelState.IsValid)
+                return BadRequest();
             var data = _cRUDService.GetRecordById(id);
-            return data;
+            return Ok(data);
         }
         #endregion
     }

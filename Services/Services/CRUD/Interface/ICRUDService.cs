@@ -12,7 +12,7 @@ namespace Services.Services.CRUD.Interface
         //Brands
         public Task<Brand> CreateBrand(Brand brand);
 
-        public void UpdateBrand(Brand brand);
+        public bool UpdateBrand(Brand brand);
 
         public IEnumerable<Brand> GetAllBrands();
 
