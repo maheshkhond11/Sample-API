@@ -20,11 +20,7 @@ namespace ExtraEdgeAssignmentAPIs.IoC
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICRUDService, CRUDService>();
             services.AddScoped<IReportService, ReportService>();
-            services.AddScoped<IRecordsRepo, RecordsRepo>();
-            services.AddScoped<IBrandsRepo, BrandsRepo>();
-            services.AddScoped<IPhonesRepo, PhonesRepo>();
-            services.AddScoped<ISalesRepo, SalesRepo>();
-            services.AddScoped<IReportRepo, ReportRepo>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString("DefaultConnection"));

@@ -12,5 +12,8 @@ namespace DTOs
         public string? Model { get; set; }
         public int UnitsSold { get; set; }
         public double TotalAmount { get; set; }
+        public int PhoneId { get; set; }
+        public double TotalAmountEarned { get; set; }
+        public string? PhoneName { get; set; }
     }
 }

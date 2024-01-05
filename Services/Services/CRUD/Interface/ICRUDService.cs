@@ -10,7 +10,7 @@ namespace Services.Services.CRUD.Interface
     public interface ICRUDService
     {
         //Brands
-        public Task<Brand> CreateBrand(Brand brand);
+        public Task CreateBrand(Brand brand);
 
         public bool UpdateBrand(Brand brand);
 
@@ -20,7 +20,7 @@ namespace Services.Services.CRUD.Interface
 
         public bool DeleteBrand(string brandname);
         //Phones
-        public Task<Phone> CreatePhone(Phone phone);
+        public Task CreatePhone(Phone phone);
 
         public void UpdatePhone(Phone phone);
 
@@ -30,7 +30,7 @@ namespace Services.Services.CRUD.Interface
 
         public bool DeletePhone(string phonename);
         //Sales
-        public Task<Sale> CreateSale(Sale sale);
+        public Task CreateSale(Sale sale);
 
         public void UpdateSale(Sale sale);
 
@@ -40,7 +40,7 @@ namespace Services.Services.CRUD.Interface
 
         public bool DeleteSale(string salename);
         //Records
-        public Task<Record> CreateRecord(Record record);
+        public Task CreateRecord(Record record);
 
         public void UpdateRecord(Record record);
 

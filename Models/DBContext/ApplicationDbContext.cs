@@ -16,11 +16,11 @@ namespace Models.DBContext
         public DbSet<Phone>? Phones { get; set; }
         public DbSet<Sale>? Sales { get; set; }
         public DbSet<Record> Records { get; set; }
-        public DbSet<TempDTO> QRecords { get; set; }
+        public DbSet<SalesReportDTO> QRecords { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<TempDTO>().HasNoKey();
+            builder.Entity<SalesReportDTO>().HasNoKey();
         }
 
 

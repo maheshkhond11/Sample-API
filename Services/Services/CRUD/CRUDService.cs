@@ -12,11 +12,11 @@ namespace Services.Services.CRUD
 {
     public class CRUDService : ICRUDService
     {
-        private readonly IBrandsRepo brandsRepo;
-        private readonly IPhonesRepo phonesRepo;
-        private readonly ISalesRepo salesRepo;
-        private readonly IRecordsRepo recordsRepo;
-        public CRUDService(IBrandsRepo _brandsRepo, IPhonesRepo _phonesRepo, ISalesRepo _salesRepo, IRecordsRepo _recordsRepo)
+        private readonly IRepository<Brand> brandsRepo;
+        private readonly IRepository<Phone> phonesRepo;
+        private readonly IRepository<Sale> salesRepo;
+        private readonly IRepository<Record> recordsRepo;
+        public CRUDService(IRepository<Brand> _brandsRepo, IRepository<Phone> _phonesRepo, IRepository<Sale> _salesRepo, IRepository<Record> _recordsRepo)
         {
             brandsRepo = _brandsRepo;
             phonesRepo = _phonesRepo;
@@ -24,19 +24,19 @@ namespace Services.Services.CRUD
             recordsRepo = _recordsRepo;
         }
         //Brand
-        public Task<Brand> CreateBrand(Brand brand)
+        public async Task CreateBrand(Brand brand)
         {
-            return brandsRepo.CreateBrand(brand);
+            await brandsRepo.Add(brand);
         }
 
         public bool DeleteBrand(string brandName)
         {
             try
             {
-                var DataList = brandsRepo.GetAllBrands().Where(x => x.BrandName == brandName).ToList();
+                var DataList = brandsRepo.GetAll().Where(x => x.BrandName == brandName).ToList();
                 foreach (var item in DataList)
                 {
-                    brandsRepo.DeleteBrand(item);
+                    brandsRepo.Delete(item);
                 }
                 return true;
             }
@@ -48,33 +48,33 @@ namespace Services.Services.CRUD
 
         public IEnumerable<Brand> GetAllBrands()
         {
-            return brandsRepo.GetAllBrands();
+            return brandsRepo.GetAll();
         }
 
         public Brand GetBrandById(int Id)
         {
-            return brandsRepo.GetBrandById(Id); 
+            return brandsRepo.GetById(Id); 
         }
 
         public bool UpdateBrand(Brand brand)
         {
-            brandsRepo.UpdateBrand(brand);
+            brandsRepo.Update(brand);
             return true;
         }
         //Phone
-        public Task<Phone> CreatePhone(Phone phone)
+        public async Task CreatePhone(Phone phone)
         {
-            return phonesRepo.CreatePhone(phone);
+            await phonesRepo.Add(phone);
         }
 
         public bool DeletePhone(string phonename)
         {
             try
             {
-                var DataList = phonesRepo.GetAllPhones().Where(x => x.PhoneName == phonename).ToList();
+                var DataList = phonesRepo.GetAll().Where(x => x.PhoneName == phonename).ToList();
                 foreach (var item in DataList)
                 {
-                    phonesRepo.DeletePhone(item);
+                    phonesRepo.Delete(item);
                 }
                 return true;
             }
@@ -86,32 +86,32 @@ namespace Services.Services.CRUD
 
         public IEnumerable<Phone> GetAllPhones()
         {
-            return phonesRepo.GetAllPhones();
+            return phonesRepo.GetAll();
         }
 
         public Phone GetPhoneById(int Id)
         {
-            return phonesRepo.GetPhoneById(Id);
+            return phonesRepo.GetById(Id);
         }
 
         public void UpdatePhone(Phone phone)
         {
-            phonesRepo.UpdatePhone(phone);
+            phonesRepo.Update(phone);
         }
         //Sales
-        public Task<Sale> CreateSale(Sale sale)
+        public async Task CreateSale(Sale sale)
         {
-            return salesRepo.CreateSale(sale);
+            await salesRepo.Add(sale);
         }
 
         public bool DeleteSale(string saleName)
         {
             try
             {
-                var DataList = salesRepo.GetAllSales().Where(x => x.SaleName == saleName).ToList();
+                var DataList = salesRepo.GetAll().Where(x => x.SaleName == saleName).ToList();
                 foreach (var item in DataList)
                 {
-                    salesRepo.DeleteSale(item);
+                    salesRepo.Delete(item);
                 }
                 return true;
             }
@@ -123,32 +123,30 @@ namespace Services.Services.CRUD
 
         public IEnumerable<Sale> GetAllSales()
         {
-            return salesRepo.GetAllSales();
+            return salesRepo.GetAll();
         }
 
         public Sale GetSaleById(int Id)
         {
-            return salesRepo.GetSaleById(Id);
+            return salesRepo.GetById(Id);
         }
-
         public void UpdateSale(Sale sale)
         {
-            salesRepo.UpdateSale(sale);
+            salesRepo.Update(sale);
         }
         //Records
-        public Task<Record> CreateRecord(Record record)
+        public async Task CreateRecord(Record record)
         {
-            return recordsRepo.CreateRecord(record);
+            await recordsRepo.Add(record);
         }
-
         public bool DeleteRecord(int id)
         {
             try
             {
-                var DataList = recordsRepo.GetAllRecords().Where(x => x.RecordId == id).ToList();
+                var DataList = recordsRepo.GetAll().Where(x => x.RecordId == id).ToList();
                 foreach (var item in DataList)
                 {
-                    recordsRepo.DeleteRecord(item);
+                    recordsRepo.Delete(item);
                 }
                 return true;
             }
@@ -160,17 +158,17 @@ namespace Services.Services.CRUD
 
         public IEnumerable<Record> GetAllRecords()
         {
-            return recordsRepo.GetAllRecords();
+            return recordsRepo.GetAll();
         }
 
         public Record GetRecordById(int Id)
         {
-            return recordsRepo.GetRecordById(Id);
+            return recordsRepo.GetById(Id);
         }
 
         public void UpdateRecord(Record record)
         {
-            recordsRepo.UpdateRecord(record);
+            recordsRepo.Update(record);
         }
     }
 }
